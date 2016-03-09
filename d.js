@@ -1,22 +1,23 @@
-var fs = require('fs');
-var wp =require('webpage')
-var file = fs.open("urls.txt", 'r');
-var urls=file.read();
-file.close();
-urlArray=urls.split('\r\n');
+var file = require('fs').open("urls.txt", 'r')
+var urls = file.read()
+file.close()
 
-var p=new Array(urlArray.length);
-console.log(p.length);
-for(var i = 0; i < p.length; i++){
-	var t=function(i){
-		console.log("f");
-		p[i] = require('webpage').create();
-		p[i].open(urlArray[i], function(status) {
-			console.log("Status: " + status);
-			  if(status === "success") {
-				p[i].viewportSize = { width: 58, height : 58 };
-				p[i].render(i+'.jpg');
+urlArray = urls.split('\r\n')
+
+var pages = new Array(urlArray.length)
+
+for (var i = 0; i < pages.length; i++) {
+	var t = function(i) {
+		pages[i] = require('webpage').create()
+		pages[i].open(urlArray[i], function(status) {
+			console.log("Status: " + status)
+			if (status === "success") {
+				pages[i].viewportSize = {
+					width: 58,
+					height: 58
+				}
+				pages[i].render(i + '.jpg')
 			}
-		});
-	}(i);
+		})
+	}(i)
 }
