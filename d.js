@@ -5,6 +5,12 @@ var urls=file.read();
 file.close();
 urlArray=urls.split('\r\n');
 
+var p=[];
+for (i in urlArray){
+	p[i]=require('webpage').create();
+}
+
+
 var p1 = require('webpage').create();
 p1.open(urlArray[0], function(status) {
 	console.log("Status: " + status);
