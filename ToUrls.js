@@ -8,7 +8,7 @@ var url = 'https://www.baidu.com/s?wd=%E6%B1%BD%E8%BD%A6%E5%93%81%E7%89%8C%E5%A4
 page.open(url, function(status) {
 	var outputString = ''
 	page.evaluate(function() {
-		$(".op_definitive_answer_po_tag_item")[8].click() //点击地区: 全部 德国 意大利 英国 法国 美国 中国 日本 其它
+		$(".op_definitive_answer_po_tag_item")[0].click() //点击地区: 全部 德国 意大利 英国 法国 美国 中国 日本 其它
 	})
 	setInterval(function() {
 		addToOutput(page.evaluate(readPage))
