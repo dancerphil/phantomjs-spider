@@ -1,3 +1,4 @@
+// var country='德国'
 var file = require('fs').open("urls.txt", 'r')
 var urls = file.read()
 file.close()
