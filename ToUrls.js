@@ -29,10 +29,16 @@ page.open(url, function(status) {
 		// 		// }
 		// 	}, 10);
 		// 	//readPage()
-
-	var x = page.evaluate(readPage);
+	var outputString=''
+	addToOutput(page.evaluate(readPage));
 	page.evaluate(clickNext);
-	setInterval(x=page.evaluate(readPage),1000);
+	writeFile()
+	// setInterval(function(){
+	// 		addToOutput(page.evaluate(readPage))
+	// 		writeFile()
+	// 	}
+	// 	,1000)
+	// }
 	function readPage(){
 		var urls = []
 		var imgs = $(".op_definitive_answer_po_itemsArea .c-img")
@@ -46,15 +52,19 @@ page.open(url, function(status) {
 	function clickNext(){
 		$(".op_definitive_answer_po_page_next")[0].click()
 	}
-	try {
-		var s = ''
-		for (xx in x) {
-			s += x[xx] + '\r\n';
-			console.log(x[xx]);
+	function addToOutput(obj){
+		for (i in obj) {
+			outputString += obj[i] + '\r\n';
+			console.log(obj[i]);
 		}
-		fs.write('urls.txt', s, 'w');
-	} catch (e) {
-		console.log(e);
 	}
+	function writeFile(){
+		try {
+			fs.write('urls.txt', outputString, 'w');
+		} catch (e) {
+			console.log(e);
+		}
+	}
+	
 	// phantom.exit()
 })
